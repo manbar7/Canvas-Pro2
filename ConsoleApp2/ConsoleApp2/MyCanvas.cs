@@ -33,6 +33,21 @@ namespace ConsoleApp2
             }
             return false;
         }
+         public static bool DeleteLastButton()
+        {
+            if (buttons[ButtonIndex-1] == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static void ClearAllButtons()
+        {
+         
+        }
 
 
         }
