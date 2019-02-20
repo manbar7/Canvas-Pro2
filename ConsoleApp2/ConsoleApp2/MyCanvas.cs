@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    class MyCanvas
+    static public class MyCanvas
     {
         public const int MaxWidth = 800;
         public const int MaxHeight = 600;
@@ -44,13 +44,75 @@ namespace ConsoleApp2
                 return true;
             }
         }
-        public static void ClearAllButtons()
+      public static void ClearAllButton()
         {
+            if (ButtonIndex > 0)
+            {
+                buttons = new MyButton[MaxButtons];
+                ButtonIndex = 0;
+            }
+        }
+        public static int GetCurrentNumbersOfButtons()
+        {
+            return ButtonIndex;
+        }
+        public static int GetMaxNumberOfButtons()
+        {
+            return MaxButtons;
+        }
+        public static int GetTheMaxWidthOfAButton()
+        {
+            int maxWidth = 0;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (buttons[i].GetWidth() > maxWidth)
+                {
+                    maxWidth = buttons[i].GetWidth();
+                }
+            }
+            return maxWidth;
+        }
+        public static int GetTheMaxHeightOfAButton()
+        {
+            int MaxHeight = 0;
+            for (int i=0;i<buttons.Length;i++)
+            {
+                if (buttons[i].GetHeight() > MaxWidth)
+                {
+                    MaxHeight = buttons[i].GetHeight();
+                }
+            }
+            return MaxHeight;
+
+        }
+        public static void Print()
+        {
+            for (int i = 0;i < buttons.Length; i++)
+            {
+                Console.Write("Top left x: " + buttons[i].GetTopLeft().GetX());
+                Console.WriteLine("Top left y: " + buttons[i].GetTopLeft().GetY());
+                Console.Write("Bottom right x: " + buttons[i].GetBottomRight().GetX());
+                Console.WriteLine("bottom right y: " + buttons[i].GetBottomRight().GetY());
+            }
+        }
+        public static bool IsPointInsideAButton(int x,int y)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (x < buttons[i].GetTopLeft().GetX() || x > buttons[i].GetBottomRight().GetX() || y > buttons[i].GetTopLeft().GetY() || y < buttons[i].GetBottomRight().GetY())
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
          
-        }
+        
+        
 
 
-        }
+        
 
     }
 }
